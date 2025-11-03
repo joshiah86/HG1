@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 뷰포트 메타 태그 추가 -->
   <title>로그라이크 카드 게임</title>
   <!-- CSS 파일 연결 -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>로그라이크 카드 게임</h1>
+  <header>
+    <h1>로그라이크 카드 게임</h1>
+  </header>
 
-<!-- 점수/HP/라운드 표시 -->
-<div id="hud"></div>
-<div id="record"></div>
+  <main>
+    <!-- 점수/HP/라운드 표시 -->
+    <div id="hud"></div>
+    <div id="record"></div>
 
-<!-- 카드 3장 표시 영역 -->
-<div id="cards"></div>
+    <!-- 카드 3장 표시 영역 -->
+    <div id="cards"></div>
+  </main>
 
-<!-- JS 파일 연결 -->
-<script src="game.js"></script>
+  <!-- JS 파일 연결 -->
+  <script src="game.js" defer></script> <!-- defer 속성 추가 -->
 </body>
 </html>
