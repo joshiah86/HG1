@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>로그라이크 카드게임</title>
+  <style>
+    body { background: #111; color: #eee; text-align: center; font-family: sans-serif; }
+    #hud { font-size: 20px; margin-top: 20px; }
+    #cards { margin-top: 50px; }
+    .card {
+      width: 120px;
+      height: 160px;
+      display: inline-block;
+      margin: 20px;
+      border: 3px solid #aaa;
+      cursor: pointer;
+      line-height: 160px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
+      user-select: none;
+      border-radius: 10px;
+    }
+    .card:hover { transform: scale(1.1); box-shadow: 0 0 15px #fff; }
+    .highlight { animation: highlightAnim 0.5s; }
+    @keyframes highlightAnim {
+      0% { transform: scale(1); box-shadow: 0 0 0px #fff; }
+      50% { transform: scale(1.2); box-shadow: 0 0 20px #fff; }
+      100% { transform: scale(1); box-shadow: 0 0 0px #fff; }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="hud">Score: 0 / HP: 100</h1>
+  <h2 id="record"></h2>
+  <div id="cards"></div>
+  <script src="game.js"></script>
+</body>
+</html>
