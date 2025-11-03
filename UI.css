@@ -1,62 +1,217 @@
-/* 전체 배경 */
+/* CSS 변수 정의 */
+:root {
+  --primary-bg-start: #0f172a;
+  --primary-bg-end: #0b1220;
+  --text-color-light: #e6eef8;
+  --accent-color: #ffd166; /* Record text color */
+  --card-bg-color: rgba(255, 255, 255, 0.06); /* HUD background, could be card default */
+  --card-text-color: rgba(11, 18, 32, 0.95);
+  --shadow-color-dark: rgba(2, 6, 23, 0.7);
+  --shadow-color-light: rgba(0,0,0,0.3);
+  --highlight-border: rgba(255, 255, 255, 0.18);
+  --default-card-color: #ccc;
+  --fire-color: #e74c3c;
+  --mind-color: #2ecc71;
+  --blood-color: #9b59b6;
+  --luck-color: #f1c40f;
+}
+
+/* 전체 배경 및 기본 스타일 */
 body {
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, sans-serif;
   text-align: center;
-  background: linear-gradient(135deg, #f0f0f0, #d0e0ff);
+  background: linear-gradient(135deg, var(--primary-bg-start), var(--primary-bg-end));
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-start; /* 상단 정렬 */
   align-items: center;
-  padding-top: 20px;
+  padding: 20px 0; /* 상단 패딩 추가 */
+  margin: 0;
+  color: var(--text-color-light);
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+/* 헤더 */
+header {
+  margin: 20px 0 10px;
+}
+
+h1 {
+  font-size: 1.8rem; /* 약간 키움 */
+  color: #fff;
+  text-align: center;
+  margin: 0; /* 기본 마진 제거 */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4); /* 그림자 강화 */
 }
 
 /* HUD 영역 */
 #hud {
-  margin: 20px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #333;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  background: rgba(255, 255, 255, 0.08); /* 배경색 조금 더 밝게 */
+  padding: 12px 20px; /* 패딩 증가 */
+  border-radius: 12px; /* 둥근 모서리 */
+  margin-bottom: 15px; /* 마진 증가 */
+  min-width: 320px;
+  box-shadow: 0 6px 16px var(--shadow-color-dark); /* 그림자 강화 */
+  display: flex;
+  gap: 15px; /* 간격 증가 */
+  justify-content: center;
+  align-items: center;
+  font-weight: 700; /* 폰트 두께 강화 */
+  font-size: 1.1rem; /* 폰트 크기 증가 */
+  border: 1px solid rgba(255,255,255,0.1); /* 경계선 추가 */
+}
+
+#hud span {
+  padding: 0 8px; /* 각 항목 패딩 */
 }
 
 #record {
-  color: red;
+  color: var(--accent-color);
   font-weight: bold;
-  font-size: 18px;
-  margin: 10px;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  font-size: 1rem; /* 크기 조정 */
+  margin-bottom: 20px; /* 마진 증가 */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
 }
 
 /* 카드 컨테이너 */
 #cards {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px; /* 간격 조정 */
   margin: 20px;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* 가로 스크롤 */
+  padding: 15px 10px; /* 패딩 조정 */
+  min-width: 320px;
+  max-width: 90vw; /* 최대 너비 설정 */
 }
 
 /* 카드 스타일 */
 .card {
-  padding: 20px;
-  width: 120px;
-  height: 80px;
-  background: #ccc;
-  border-radius: 12px;
+  min-width: 180px; /* 최소 너비 증가 */
+  max-width: 280px; /* 최대 너비 증가 */
+  padding: 22px 18px; /* 패딩 증가 */
+  border-radius: 15px; /* 둥근 모서리 증가 */
+  color: var(--card-text-color);
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 8px 20px var(--shadow-color-dark); /* 그림자 강화 */
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   user-select: none;
+  flex: 0 0 auto; /* 유연성 설정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 내용 분산 */
+  align-items: center;
+  border: 1px solid rgba(0,0,0,0.1); /* 카드 경계선 추가 */
+}
+
+.card:focus {
+  outline: 4px solid var(--highlight-border); /* 포커스 아웃라인 강화 */
+  outline-offset: 2px; /* 아웃라인 간격 */
 }
 
 .card:hover {
-  transform: scale(1.1);
-  box-shadow: 4px 4px 12px rgba(0,0,0,0.5);
+  transform: translateY(-8px) scale(1.03); /* 호버 효과 강화 */
+  box-shadow: 0 14px 30px rgba(2,6,23,0.8); /* 호버 그림자 강화 */
+  filter: brightness(1.05); /* 밝기 증가 */
+}
+
+.card:active {
+  transform: translateY(-3px) scale(0.98); /* 클릭 시 효과 강화 */
+  box-shadow: 0 6px 15px rgba(2,6,23,0.6);
+}
+
+.card .name {
+  display: block;
+  font-size: 1.15rem; /* 카드 이름 크기 증가 */
+  margin-bottom: 10px; /* 마진 증가 */
+  color: var(--card-text-color);
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+.card .meta {
+  font-size: 0.9rem; /* 메타 정보 크기 조정 */
+  opacity: 0.85; /* 투명도 조정 */
+  margin-bottom: 8px;
+  color: var(--card-text-color);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.card .description {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  line-height: 1.4;
+  color: var(--card-text-color);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.03);
 }
 
 .highlight {
-  border: 3px solid gold;
+  outline: 5px solid gold; /* 하이라이트 테두리 색상 및 두께 변경 */
+  transform: scale(1.04); /* 하이라이트 시 약간 더 크게 */
+  box-shadow: 0 16px 32px rgba(255,215,0,0.4); /* 금색 그림자 효과 */
+}
+
+/* 스크롤바 스타일 */
+#cards::-webkit-scrollbar {
+  height: 10px;
+}
+#cards::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12); /* 스크롤바 색상 조정 */
+  border-radius: 999px;
+}
+#cards::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  #hud {
+    flex-direction: column; /* 세로로 쌓기 */
+    gap: 8px;
+    padding: 10px 15px;
+    min-width: unset;
+    width: 90%;
+  }
+  #record {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  #cards {
+    gap: 10px;
+    padding: 10px;
+    min-width: unset;
+    width: 95%;
+  }
+  .card {
+    min-width: 150px;
+    padding: 18px 12px;
+  }
+  .card .name {
+    font-size: 1rem;
+  }
+  .card .meta {
+    font-size: 0.8rem;
+  }
+  .card .description {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+  #hud {
+    font-size: 0.9rem;
+  }
+  .card {
+    min-width: 130px;
+    padding: 15px 10px;
+  }
 }
